@@ -1,0 +1,68 @@
+.btn {
+  all: unset;
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 7px;
+  margin-left: 25px;
+  margin-top: 25px;
+  width: 80px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.movieDetails {
+  display: flex;
+  padding: 25px;
+}
+
+.img {
+  padding-right: 40px;
+}
+.description {
+  width: 50%;
+}
+
+.title {
+  font-size: 30px;
+  padding-bottom: 40px;
+}
+
+.text {
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+
+.accent {
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.genre {
+  margin-right: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+}
+
+.link {
+  /* text-decoration: ; */
+  font-size: 30px;
+  font-weight: 700;
+  display: block;
+  margin-right: 40px;
+  color: black;
+}
+
+.activeClassName {
+  color: rgb(235, 0, 0);
+}

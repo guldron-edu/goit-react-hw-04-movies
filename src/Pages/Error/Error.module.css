@@ -1,0 +1,28 @@
+.wrapper {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.text {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.btn {
+  all: unset;
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 7px;
+  margin-left: 25px;
+  margin-top: 25px;
+  /* width: 80px; */
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.btn:hover {
+  color: rgb(235, 0, 0);
+}

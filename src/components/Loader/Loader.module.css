@@ -1,0 +1,5 @@
+.loader {
+  position: fixed;
+  top: 50vh;
+  padding-left: calc(50% - 40px);
+}

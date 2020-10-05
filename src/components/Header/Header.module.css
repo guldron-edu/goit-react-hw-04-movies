@@ -1,0 +1,21 @@
+.header {
+  font-size: 30px;
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0px 5px 7px 0px rgba(184, 184, 184, 1);
+
+  padding-left: 70px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.link {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+
+  margin-right: 40px;
+}
+
+.activeLink {
+  color: rgb(235, 0, 0);
+}
