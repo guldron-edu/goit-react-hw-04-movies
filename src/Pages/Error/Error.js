@@ -1,10 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Error.module.css";
 import routes from "../../routes";
-
-const goBack = (history) => {
-  history.push(routes.MoviesPage);
-};
 
 export default function Error(props) {
   return (
@@ -12,14 +9,14 @@ export default function Error(props) {
       <p className={styles.text}>
         Упс...Такой страницы не существут...попробуйте еще раз
       </p>
-
-      <button
-        type="button"
-        className={styles.btn}
-        onClick={() => goBack(props.history)}
+      <Link
+        className={styles.link}
+        to={{
+          pathname: `${routes.MoviesPage}`,
+        }}
       >
         Вернуться к поиску
-      </button>
+      </Link>
     </div>
   );
 }

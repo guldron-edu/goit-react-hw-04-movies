@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import Gallery from "../../components/Gallery/Gallery";
+import ErrorPage from "../Error/Error";
 import API from "../../API/fetchApi";
 import routes from "../../routes";
 import parseSearch from "../../utils/parseQueryString";
@@ -17,14 +18,15 @@ export default class HomePage extends Component {
   state = {
     popularMovies: [],
     loading: false,
+    error: false,
   };
 
   componentDidMount() {
-    API.fetchShowPopular().then((response) =>
-      this.setState({ popularMovies: response.results })
-    ).catch(() => {
-      this.props.history.push(routes.Error);
-    });
+    API.fetchShowPopular()
+      .then((response) => this.setState({ popularMovies: response.results }))
+      .catch(() => {
+        this.props.history.push(routes.Error);
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,11 +48,12 @@ export default class HomePage extends Component {
         this.setState((prevState) => {
           return {
             popularMovies: [...prevState.popularMovies, ...response.results],
+            error: false,
           };
         })
       )
       .catch(() => {
-        this.props.history.push(routes.Error);
+        this.setState({ error: true });
       })
       .finally(() => this.setState({ loading: false }));
   };
@@ -74,19 +77,22 @@ export default class HomePage extends Component {
   };
 
   render() {
-    const { popularMovies, loading } = this.state;
+    const { popularMovies, loading, error } = this.state;
     return (
       <>
-        <Route
-          path={routes.HomePage}
-          render={(props) => (
-            <Gallery
-              {...props}
-              movies={popularMovies}
-              nextPage={this.nextPopularPage}
-            />
-          )}
-        />
+        {!error && (
+          <Route
+            path={routes.HomePage}
+            render={(props) => (
+              <Gallery
+                {...props}
+                movies={popularMovies}
+                nextPage={this.nextPopularPage}
+              />
+            )}
+          />
+        )}
+        {error && <ErrorPage />}
         {loading && <Loader />}
       </>
     );

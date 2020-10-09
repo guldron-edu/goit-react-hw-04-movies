@@ -15,9 +15,9 @@ const MovieDetailsPageComponent = lazy(() =>
     "../Pages/MovieDetailsPage/MovieDetailsPage" /* webpackChunkName: "MovieDetails" */
   )
 );
-const ErrorPageComponent = lazy(() =>
-  import("../Pages/Error/Error" /* webpackChunkName: "Error" */)
-);
+// const ErrorPageComponent = lazy(() =>
+//   import("../Pages/Error/Error" /* webpackChunkName: "Error" */)
+// );
 
 export default function App() {
   return (
@@ -31,7 +31,7 @@ export default function App() {
               component={MovieDetailsPageComponent}
             />
             <Route path={routes.MoviesPage} component={MoviesPageComponent} />
-            <Route path={routes.Error} component={ErrorPageComponent} />
+            {/* <Route path={routes.Error} component={ErrorPageComponent} /> */}
             <Redirect to={routes.HomePage} />
           </Switch>
         </Suspense>

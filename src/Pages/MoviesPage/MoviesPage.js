@@ -9,6 +9,7 @@ import routes from "../../routes";
 import InputForm from "../../components/inputForm/inputForm";
 import parseSearch from "../../utils/parseQueryString";
 import styles from "./MoviesPage.module.css";
+import ErrorPage from "../Error/Error";
 import scroll from "../../utils/scroll";
 
 export default class MoviePage extends Component {
@@ -17,7 +18,7 @@ export default class MoviePage extends Component {
     location: PropTypes.object,
     match: PropTypes.object,
   };
-  state = { foundMovies: [], loading: false };
+  state = { foundMovies: [], loading: false, error: false };
 
   componentDidMount() {
     const { search } = this.props.location;
@@ -68,11 +69,12 @@ export default class MoviePage extends Component {
         this.setState((prevState) => {
           return {
             foundMovies: [...prevState.foundMovies, ...response.results],
+            error: false,
           };
         })
       )
       .catch(() => {
-        this.props.history.push(routes.Error);
+        this.setState({ error: true });
       })
       .finally(() => this.setState({ loading: false }));
   };
@@ -96,25 +98,28 @@ export default class MoviePage extends Component {
   };
 
   render() {
-    const { foundMovies, loading } = this.state;
+    const { foundMovies, loading, error } = this.state;
     return (
       <>
-        <div className={styles.wrapper}>
-          <InputForm submit={this.addSearchQuery} />
-          {foundMovies.length > 0 && (
-            <Route
-              path={routes.HomePage}
-              render={(props) => (
-                <Gallery
-                  {...props}
-                  movies={foundMovies}
-                  nextPage={this.nextPage}
-                />
-              )}
-            />
-          )}
-          {loading && <Loader />}
-        </div>
+        {!error && (
+          <div className={styles.wrapper}>
+            <InputForm submit={this.addSearchQuery} />
+            {foundMovies.length > 0 && (
+              <Route
+                path={routes.HomePage}
+                render={(props) => (
+                  <Gallery
+                    {...props}
+                    movies={foundMovies}
+                    nextPage={this.nextPage}
+                  />
+                )}
+              />
+            )}
+            {loading && <Loader />}
+          </div>
+        )}
+        {error && <ErrorPage />}
       </>
     );
   }
